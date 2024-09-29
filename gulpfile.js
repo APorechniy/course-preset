@@ -1,20 +1,8 @@
 import { task, src, dest, watch, series } from "gulp";
 import concat from 'gulp-concat';
 import server from 'gulp-webserver';
-import repath from 'gulp-repath'
 
 const PORT = 3000
-
-const repathConf = {
-    verMode: 'hash',
-    hashName: '{origin}-{hash}',
-    baseMap: {'src': './dist'},
-    element: ['script', 'style', 'image'],
-    excludeFile: [],
-    replace: {
-      '@cdn/': `//localhost:${PORT}/`
-    }
-};
 
 task("html", function() {
     return src("./src/*.html")
@@ -25,24 +13,6 @@ task("css", function() {
     return src("src/css/*.css")
         .pipe(concat('style.css'))
         .pipe(dest("dist/css"));
-});
-
-task('finale-scripts', function() {
-    return src('dist/js/*.js')
-      .pipe(repath(repathConf))
-      .pipe(dest('dist/js'));
-  });
-
-task('finale-css', function() {
-    return src('dist/css/*.css')
-      .pipe(repath(repathConf))
-      .pipe(dest('dist/css'));
-  });
-  
-task('finale-html', function() {
-return src('./*.html')
-    .pipe(repath(repathConf))
-    .pipe(dest('./'));
 });
 
 task("scripts", function() {
@@ -56,7 +26,7 @@ task('imgs', function() {
 });
 
 task('build', async function() {
-    const tasks = series("html", "css", "scripts", "finale-css", "finale-scripts", "finale-html")
+    const tasks = series("html", "css", "scripts")
     await tasks()
 })
 
