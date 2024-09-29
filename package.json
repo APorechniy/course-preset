@@ -1,0 +1,21 @@
+{
+  "name": "course-preset",
+  "version": "1.0.0",
+  "description": "Preset for course app",
+  "main": "gulpfile.js",
+  "type": "module",
+  "scripts": {
+    "start": "gulp build && gulp server",
+    "build": "gulp build"
+  },
+  "author": "APorechniy",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/gulp": "^4.0.17",
+    "gulp": "^5.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-repath": "^1.0.2",
+    "gulp-webserver": "^0.9.1",
+    "require-dir": "^1.2.0"
+  }
+}
